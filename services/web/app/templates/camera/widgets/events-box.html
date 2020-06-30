@@ -1,0 +1,55 @@
+<div class="col" id="events-box">
+    <div class="main-event-table-box">
+        <table id="main-id-events" class="table table-bordered table-hover main-event-table">
+            <thead>
+            <tr class="table-active">
+                <th scope="col">Пользователь</th>
+                <th scope="col">Событие</th>
+                <th scope="col">Время</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for event in events|reverse %}
+                <tr data-event-id="{{ event.id }}" class="line-event">
+                    <td>
+                        {% if event.user %}
+                            <a href="{{ url_for('users.user_view', id=event.user.id) }}">{{ event.user }}</a>
+                        {% else %}
+                            Неизвестный пользователь
+                        {% endif %}
+                    </td>
+                    <td>{{ event.type_test() }}</td>
+                    <td>{{ event.timestamp.strftime('%H:%M:%S %d/%m/%Y') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="card mb-3 main-user-card-box">
+        <div class="row no-gutters">
+            <div class="col-md-5 main-user-card-img-inner">
+                {% if event.user %}
+                    <img src="{{ url_for('static', filename=event.user.avatar_image) }}" class="card-img">
+                {% else %}
+                    <img src="{{ url_for('static', filename=config['NO_IMAGE_FILE']) }}"
+                         class="card-img">
+                {% endif %}
+            </div>
+            <div class="col-md-7">
+                <div class="card-body">
+                    {% if event %}
+                        {% if event.user %}
+                            <h3 class="card-title">{{ event.user.fio() }}</h3>
+                            <h5 class="card-text mb-5"><b>Роль:</b> {{ event.user.get_role_name_ru() }}</h5>
+                        {% else %}
+                            <h3 class="card-title mb-5">Неизвестный пользователь</h3>
+                        {% endif %}
+                        {% if event.need_action() %}
+                            <button type="button" class="btn btn-success">Открыть дверь</button>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

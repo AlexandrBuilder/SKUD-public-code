@@ -1,0 +1,25 @@
+{% extends "base_template.html" %}
+
+{% block title %}Видеокамеры{% endblock %}
+
+{% block content %}
+    <div class="mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Главная станица</li>
+            </ol>
+        </nav>
+    </div>
+    {% set camera_size = 'large' %}
+    {% set context = 'main_page' %}
+    <div>
+        <div class="row">
+            <div class="col">
+                {% for key, camera in cameras.items() %}
+                    {% include 'camera/widgets/camera-box.html' %}
+                {% endfor %}
+            </div>
+            {% include 'camera/widgets/events-box.html'%}
+        </div>
+    </div>
+{% endblock %}

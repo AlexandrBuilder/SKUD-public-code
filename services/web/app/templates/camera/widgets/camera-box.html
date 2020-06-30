@@ -1,0 +1,97 @@
+{% if camera %}
+    <div class="col video-stream-box">
+        <div class="{% if camera_size == 'large' %}video-stream-large{% else %}video-stream-small{% endif %} video-stream-box-inner">
+            <img class="video-stream-img"
+                 src="{{ url_for('cameras.video_stream') }}?link={{ camera.link }}">
+            <div class="mask">
+
+                <a class="zoom" href="#" data-toggle="modal" data-target="#zooModal{{ key }}">
+                    <i class="fas fa-search-plus fa-fw" aria-hidden="true"></i>
+                </a>
+
+                <a class="edit" href="#" data-toggle="modal" data-target="#editModal{{ key }}">
+                    <i class="fas fa-edit fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="zooModal{{ key }}" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Просмотр камеры №{{ key }}</h4>
+                    <button class="close" data-dismiss="modal">х</button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <p><b>Ссылка:</b> <a href="{{ camera.link }}"> {{ camera.link }}</a></p>
+                    </div>
+                    <div class="zoom-video-stream-box">
+                        <div class="zoom-video-stream-box-inner">
+                            <img class="zoom-video-stream-img"
+                                 src="{{ url_for('cameras.video_stream') }}?link={{ camera.link }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="editModal{{ key }}" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Редактирование камеры №{{ key }}</h4>
+                    <button class="close" data-dismiss="modal">х</button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url_for('cameras.edit_camera', id=camera.id, context=context) }}" method="POST">
+                        <div class="form-group">
+                            <label class="small mb-1" for="editInputLink">Ссылка</label>
+                            <input class="form-control py-4" id="editInputLink" name="link" type="url"
+                                   placeholder="Введите ссылку" autofocus="" required
+                                   value="{{ camera.link }}"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Редактировать камеру</button>
+                        <a href="{{ url_for('cameras.delete_camera', id=camera.id, context=context) }}"
+                           class="mt-1 btn btn-danger w-100">Удалить камеру</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% else %}
+
+    <div class="col video-stream-box">
+        <div class="{% if camera_size == 'large' %}video-stream-large{% else %}video-stream-small{% endif %} video-stream-box-void">
+            <a class="plus" href="#" data-toggle="modal" data-target="#addModal{{ key }}">
+                <i class="fas fa-plus fa-fw"></i>
+            </a>
+        </div>
+    </div>
+
+    <div id="addModal{{ key }}" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Добавление новой камеры</h4>
+                    <button class="close" data-dismiss="modal">х</button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ url_for('cameras.add_camera', context=context) }}" method="POST">
+                        <input type="hidden" name="position" value="{{ key }}"/>
+                        <div class="form-group">
+                            <label class="small mb-1" for="inputLink">Ссылка</label>
+                            <input class="form-control py-4" id="inputLink" name="link" type="url"
+                                   placeholder="Введите ссылку" autofocus="" required/>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Добавить камеру</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}

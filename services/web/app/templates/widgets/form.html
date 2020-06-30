@@ -1,0 +1,40 @@
+{{ form.hidden_tag() }}
+{% for field in form %}
+    {% with placeholder = field.label.text %}
+        {% if field.type == 'StringField' or field.type == 'PasswordField' or field.type == 'TextAreaField' %}
+            <div class="form-group">
+                {{ field.label }}
+                {{ field(class="form-control", placeholder=placeholder) }}
+            </div>
+        {% elif field.type == 'BooleanField' %}
+            <div class="form-check mt-2 mb-3">
+                {{ field(class="form-check-input") }}
+                {{ field.label(class="form-check-label") }}
+            </div>
+        {% elif field.type == 'SelectField' or field.type == 'QuerySelectField' %}
+            <div class="form-group">
+                {{ field.label(class="form-check-label") }}
+                {{ field(class="form-control") }}
+            </div>
+        {% elif field.type == 'FileField' %}
+            {% if field.default %}
+                <div class="form-img-inner">
+                    <img class="form-img" src="{{ url_for('static', filename=field.default) }}" alt="">
+                </div>
+            {% endif %}
+            <div class="form-group">
+                <div class="custom-file">
+                    {{ field(class="custom-file-input") }}
+                    {{ field.label(class="custom-file-label") }}
+                </div>
+            </div>
+        {% elif field.type == 'DateTimeField' %}
+            <div class="form-group">
+                {{ field.label(class="form-check-label") }}
+                {{ field(class="form-control", type="datetime-local", step="1") }}
+            </div>
+        {% elif field.type == 'SubmitField' %}
+            {{ field(class="btn btn-primary") }}
+        {% endif %}
+    {% endwith %}
+{% endfor %}

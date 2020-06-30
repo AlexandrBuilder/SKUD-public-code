@@ -1,0 +1,33 @@
+{% extends "base_template.html" %}
+
+{% block title %} Регистрация пользователей {% endblock %}
+
+{% block content %}
+    <div class="mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{url_for('users.index')}}">Пользователи</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Просмотр пользователя</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><span class="font-weight-bold">ID:</span> {{user.id}}</li>
+                <li class="list-group-item"><span class="font-weight-bold">Email:</span> {{user.email}}</li>
+                <li class="list-group-item"><span class="font-weight-bold">Имя:</span> {{user.first_name}}</li>
+                <li class="list-group-item"><span class="font-weight-bold">Фамилия:</span> {{user.second_name}}</li>
+                <li class="list-group-item"><span class="font-weight-bold">Отчество:</span> {{user.middle_name}}</li>
+                <li class="list-group-item"><span class="font-weight-bold">Рассылка:</span> {{'Да' if user.send_flag else 'Нет'}}</li>
+                <li class="list-group-item"><span class="font-weight-bold">Вектор:</span> {{user.vector}}</li>
+            </ul>
+        </div>
+        <div class="col">
+            <div class="user-image">
+                <img class="table-img" src="{{ url_for('static', filename=user.avatar_image) }}" alt="">
+            </div>
+        </div>
+    </div>
+{% endblock %}

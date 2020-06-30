@@ -1,0 +1,22 @@
+{% extends "base_template.html" %}
+
+{% block title %}Видеокамеры{% endblock %}
+
+{% block content %}
+    {% set context = 'cameras' %}
+    <div class="video-stream-container">
+        {% for key, camera in cameras.items() %}
+
+            {% if key % 3 == 1 and key != 0 %}
+                </div>
+            {% endif %}
+
+            {% if key % 3 == 1 %}
+                <div class="row">
+            {% endif %}
+            {% include 'camera/widgets/camera-box.html'%}
+        {% endfor %}
+
+        </div>
+
+{% endblock %}
