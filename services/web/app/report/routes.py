@@ -1,13 +1,12 @@
 from datetime import datetime
 
-from flask import render_template, flash, current_app, send_file
-
 from app.auth.decorators import role_required
 from app.models import User, Role
 from app.report import bp
 from app.report.documents import get_report_file
 from app.report.email import send_report
 from app.report.forms import ReportForm
+from flask import render_template, flash, current_app, send_file
 
 
 @bp.route('/report', methods=['GET', 'POST'])

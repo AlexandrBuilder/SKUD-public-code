@@ -3,13 +3,12 @@ import os
 from logging.handlers import RotatingFileHandler
 
 import flask_excel as excel
+from config import Config
 from flask import Flask
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-
-from config import Config
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -56,6 +55,3 @@ def create_app(config_class=Config):
         app.logger.addHandler(file_handler)
 
     return app
-
-
-from app import models

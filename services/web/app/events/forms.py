@@ -1,9 +1,8 @@
+from app.forms import AppForm
+from app.models import User, Event
 from flask import request
 from wtforms import SubmitField, SelectField, TextAreaField, DateTimeField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
-
-from app.forms import AppForm
-from app.models import User, Event
 
 
 class SearchDateTimeForm(AppForm):

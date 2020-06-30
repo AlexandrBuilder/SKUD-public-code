@@ -1,4 +1,5 @@
 import functools
+
 from flask import redirect, url_for, abort
 from flask_login import current_user
 

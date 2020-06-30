@@ -1,5 +1,5 @@
-from flask import current_app
 from app.email import send_email
+from flask import current_app
 
 
 def send_report(datetime_from, datetime_to, user, emails, attachments):
@@ -12,7 +12,7 @@ def send_report(datetime_from, datetime_to, user, emails, attachments):
     else:
         message = 'Отчет на ({0} - {1}). В прикрепленном файле содержится информация о действиях пользователя "{2}" ' \
                   'происходящих в промежутке от {0} до {1}'.format(datetime_from.strftime('%d/%m/%Y %H:%M:%S'),
-                                                      datetime_to.strftime('%d/%m/%Y %H:%M:%S'), str(user))
+                                                                   datetime_to.strftime('%d/%m/%Y %H:%M:%S'), str(user))
         subject = 'Отчет на ({0} - {1}) об пользователе {2}'.format(datetime_from.strftime('%d/%m/%Y %H:%M:%S'),
                                                                     datetime_to.strftime('%d/%m/%Y %H:%M:%S'),
                                                                     str(user))

@@ -1,9 +1,8 @@
+from app.forms import AppForm
+from app.models import User, Event
 from wtforms import SubmitField, SelectField, DateTimeField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired
-
-from app.forms import AppForm
-from app.models import User, Event
 
 
 class ReportForm(AppForm):

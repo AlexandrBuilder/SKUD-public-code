@@ -10,9 +10,7 @@
             </ol>
         </nav>
     </div>
-
     {% include 'widgets/flash_message.html' %}
-
     <div class="clearfix">
         <div class="float-left">
             <form class="form-inline">
@@ -29,7 +27,6 @@
                 пользователя</a>
         {% endif %}
     </div>
-
     <div class="mt-4 text-center">
         <table class="table table-bordered table-hover">
             <thead>
@@ -68,7 +65,6 @@
             {% endfor %}
             </tbody>
         </table>
-
         <nav aria-label="..." class="d-flex justify-content-center">
             <ul class="pagination">
                 {% if users.has_prev %}

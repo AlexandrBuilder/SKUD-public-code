@@ -1,10 +1,9 @@
-from flask import request, redirect, url_for, render_template, Response
-
 from app import db
 from app.auth.decorators import role_required
 from app.cameras import bp
 from app.cameras.video_stream import VideoStream
 from app.models import Camera, Role, Event
+from flask import request, redirect, url_for, render_template, Response
 
 
 @bp.route('/', methods=['GET'])
@@ -13,7 +12,8 @@ from app.models import Camera, Role, Event
 def main():
     events = Event.query.order_by(Event.timestamp.desc()).limit(5).all()
     event = Event.query.order_by(Event.timestamp.desc()).first()
-    cameras_dict = {i: Camera.query.filter_by(position=i).filter_by(context=Camera.CONTEXT_MAIN_PAGE).first() for i in range(1, 3)}
+    cameras_dict = {i: Camera.query.filter_by(position=i).filter_by(context=Camera.CONTEXT_MAIN_PAGE).first() for i in
+                    range(1, 3)}
     return render_template('camera/main.html', cameras=cameras_dict, events=events, event=event)
 
 
@@ -32,7 +32,8 @@ def last_events():
 @bp.route('/cameras', methods=['GET', 'POST'])
 @role_required([Role.ROLE_ADMIN, Role.ROLE_SECRETARY])
 def cameras():
-    cameras_dict = {i: Camera.query.filter_by(context=Camera.CONTEXT_CAMERAS).filter_by(position=i).first() for i in range(1, 10)}
+    cameras_dict = {i: Camera.query.filter_by(context=Camera.CONTEXT_CAMERAS).filter_by(position=i).first() for i in
+                    range(1, 10)}
     return render_template('camera/camera.html', cameras=cameras_dict)
 
 

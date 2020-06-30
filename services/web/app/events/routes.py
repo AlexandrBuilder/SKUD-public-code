@@ -1,10 +1,9 @@
-from flask import request, redirect, url_for, render_template, flash, current_app
-
 from app import db
 from app.auth.decorators import role_required
 from app.events import bp
 from app.events.forms import SearchDateTimeForm, EventsForm
 from app.models import Event, Role
+from flask import request, redirect, url_for, render_template, flash, current_app
 
 
 @bp.route('/events', methods=['GET'])

@@ -1,11 +1,10 @@
 import os
 from datetime import datetime
 
-from flask_login import UserMixin
-from flask import current_app
-from werkzeug.security import generate_password_hash, check_password_hash
-
 from app import db, login
+from flask import current_app
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 @login.user_loader
@@ -127,6 +126,7 @@ class Event(db.Model):
 
     def need_action(self):
         return self.type == self.EVENT_IN_SIGHT
+
 
 class Camera(db.Model):
     __tablename__ = 'camera'

@@ -1,11 +1,10 @@
-from flask import current_app, render_template, flash, redirect, url_for, request
-from flask_login import login_user, logout_user
-from werkzeug.urls import url_parse
-
 from app.auth import bp
 from app.auth.decorators import not_authorized
 from app.auth.forms import LoginForm
 from app.models import User
+from flask import current_app, render_template, flash, redirect, url_for, request
+from flask_login import login_user, logout_user
+from werkzeug.urls import url_parse
 
 
 @bp.route('/login', methods=['GET', 'POST'])
